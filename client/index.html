@@ -1,0 +1,28 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="/bower_components/phaser/build/phaser.js"></script>
+<script>
+  var socket = io.connect('http://localhost:8080');
+  socket.on('event', function (data) {
+    console.log(data);
+    // socket.emit('create', { my: 'data' });
+  });
+  // socket.emit('action', {
+  //   name: 'sample',
+  //   data: {
+  //     key: 'value'
+  //   }
+  // });
+  var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { 
+    preload: preload, 
+    create: create, 
+    update: update 
+  });
+  function preload() {
+  }
+
+  function create() {
+  }
+
+  function update() {
+  }
+</script>

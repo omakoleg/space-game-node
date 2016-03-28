@@ -1,0 +1,21 @@
+{
+  "name": "space_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "worker": "node worker.js",
+    "lint": "jshint **.js"
+  },
+  "author": "Oleg Makiienko <oleg.makiienko@gmail.com> (https://github.com/omakoleg)",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.7",
+    "node-uuid": "^1.4.7",
+    "socket.io": "^1.4.5"
+  }
+}

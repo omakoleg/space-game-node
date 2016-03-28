@@ -1,0 +1,94 @@
+<div class="main-header">
+  
+  <div class="ship-planet-container" ng-show="trade_window_is_show">
+    <button type="button" ng-click="trade_window_close_handler()" 
+			class="btn btn-xs btn-danger btn-close">close</button>
+    <div>
+      <table>
+        <tr>
+          <td>
+            <div>
+              <div>Devices: {{ship_modifiers._devices_count}} / {{ship_modifiers.devices_count}}</div>
+              <div>Capacity: {{ship_modifiers._capacity}} / {{ship_modifiers.capacity}}</div>
+              <div>Structure: {{ship_modifiers._structure}} / {{ship_modifiers.structure}}</div>
+              <div>Speed: {{ship_modifiers._speed}}</div>
+              <div>Race: {{ship_modifiers.race}}</div>
+              <div>Type: {{ship_modifiers.type}}</div>
+            </div>
+            <div ng-repeat="device in trade_window_ship_devices">
+              <b>{{device.name}}</b> ({{device.price}})
+              <button type="button" class="btn btn-primary btn-xs" 
+                ng-click="trade_window_sell_device(device)">sell</button>
+            </div>
+          </td>
+          <td>
+            <div ng-repeat="device in trade_window_planet_devices">
+              <b>{{device.name}}</b> ({{device.price}})
+              <button type="button" class="btn btn-primary btn-xs"
+                ng-click="trade_window_buy_device(device)">buy</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="minimap-container">
+    <div class="minimap" ng-show="action_minimap_show">
+      <div class="ss" ng-repeat="ss in solar_systems"
+        style="position: absolute; top: {{ss.yr}}px; left: {{ss.xr}}px;"
+        ng-click="click_solar_system_action(ss)">
+        {{ss.name[0]}}
+      </div>
+    </div>
+    <button type="button" ng-click="show_map_action()" class="btn btn-xs btn-info">Map</button>
+  </div>
+  
+  <div class="planet-ships-container">
+    <div class="planet-ships" ng-show="is_show_planet_ships">
+      ----
+      <div ng-repeat="ship in ships" ng-show="ship.user_id != null && ship.planet_id != null">
+        <button type="button" ng-click="take_off_planet_action(ship)" class="btn btn-xs btn-primary"> &lt;- {{ship.name}}</button>
+        <button type="button" ng-click="trade_window_show_handler(ship)" class="btn btn-xs btn-success">trade</button>
+      </div>
+    </div>
+    <button type="button" ng-click="show_planet_ships_action()" class="btn btn-xs">Planets</button>
+  </div>
+  
+  <div class="actions-container" ng-show="ship != null"> 
+    <span style="color: white;">{{ship.name}}</span>
+    <button ng-click="move_action()"  type="button" 
+      class="btn btn-sm {{is_move_action ? 'btn-info' : 'btn-default'}}">
+      Move
+    </button>
+    <button ng-click="land_planet_action()"  type="button" 
+      class="btn btn-sm {{is_land_planet_action ? 'btn-info' : 'btn-default'}}">
+      Land
+    </button>
+    <button ng-click="warp_system_action()"  type="button" 
+      class="btn btn-sm {{is_warp_system_action ? 'btn-info' : 'btn-default'}}">
+      Jump
+    </button>
+  </div>
+  
+</div>
+<div class="clear"></div>
+<div class="main-container">
+  <div style="width: {{html_system_size}}px; height: {{html_system_size}}px;" class="grid-inner"
+    ng-click="click_grid_handler($event)">
+    <div class="vertical-line" style="left: {{html_system_size_div2}}px;"></div>
+    <div class="horisontal-line" style="top: {{html_system_size_div2}}px;"></div>
+    <div class="planet" ng-repeat="planet in planets"
+      ng-click="click_planet_handler(planet)"
+      style="absolute; top: {{planet.yr}}px; left: {{planet.xr}}px;">
+      {{planet.name[0]}}
+    </div>
+    <img ng-repeat="ship in ships" class="ship" 
+        ng-src="/images/{{ship.type}}.png"
+        style="position: absolute;"
+        ui-position-animate="ship.xy_animate"
+        ng-click="click_ship_handler(ship)"
+        ng-show="ship.planet_id == null"/>
+    </div>
+  </div>
+</div>
